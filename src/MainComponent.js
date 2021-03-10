@@ -52,6 +52,15 @@ function MainComponent() {
     console.log(selectionArea);
   }, [selectionArea]);
 
+  const setSelectionAreaText = (e) => {
+    const t = {
+      ...selectionArea.filter((c) => c.id == focusId)[0],
+      text: e.target.value,
+    };
+    setSelectionArea([...selectionArea.filter((c) => c.id != focusId), t]);
+    forceUpdate();
+  };
+
   const handleSelectionAreaUpdate = (t) => {
     setSelectionArea([...selectionArea.filter((c) => c.id != t.id), t]);
     setFocusId(t.id);
@@ -87,9 +96,13 @@ function MainComponent() {
         <form>
           <label>
             Name:
-            <input type="text" name="name" />
+            <input
+              type="text"
+              name="name"
+              value={selectionArea.filter((c) => c.id == focusId).text}
+              onChange={setSelectionAreaText}
+            />
           </label>
-          <input type="submit" value="Submit" />
         </form>
         <p>
           Edit <code>src/App.js</code> and save to reload.
