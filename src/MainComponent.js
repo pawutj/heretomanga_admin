@@ -6,7 +6,7 @@ import testImg from "./test.png";
 
 function MainComponent() {
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
-  const [focusId, setFocusId] = useState(0);
+  const [focusId, setFocusId] = useState(1);
   const [selectionArea, setSelectionArea] = useState([
     {
       id: 1,
@@ -32,7 +32,7 @@ function MainComponent() {
       ...selectionArea,
       {
         id: _id,
-
+        text: "",
         dimensions: {
           height: 100,
           width: 200,
@@ -43,14 +43,12 @@ function MainComponent() {
         },
       },
     ]);
-    setFocusId(_id);
-    forceUpdate();
   };
 
   useEffect(() => {
-    forceUpdate();
     console.log(selectionArea);
-  }, [selectionArea]);
+    forceUpdate();
+  }, [selectionArea, focusId]);
 
   const setSelectionAreaText = (e) => {
     const t = {
@@ -58,13 +56,11 @@ function MainComponent() {
       text: e.target.value,
     };
     setSelectionArea([...selectionArea.filter((c) => c.id != focusId), t]);
-    forceUpdate();
   };
 
   const handleSelectionAreaUpdate = (t) => {
     setSelectionArea([...selectionArea.filter((c) => c.id != t.id), t]);
     setFocusId(t.id);
-    console.log(selectionArea);
   };
 
   return (
@@ -96,12 +92,16 @@ function MainComponent() {
         <form>
           <label>
             Name:
-            <input
-              type="text"
-              name="name"
-              value={selectionArea.filter((c) => c.id == focusId).text}
-              onChange={setSelectionAreaText}
-            />
+            {selectionArea
+              .filter((c) => c.id == focusId)
+              .map((c, k) => (
+                <input
+                  type="text"
+                  name="name"
+                  value={c.text}
+                  onChange={setSelectionAreaText}
+                />
+              ))}
           </label>
         </form>
         <p>
