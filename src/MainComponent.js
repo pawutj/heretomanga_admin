@@ -90,11 +90,16 @@ function MainComponent() {
                 position: "absolute",
                 left: c.coordinates.x,
                 top: c.coordinates.y,
-                backgroundColor: "red",
                 zIndex: 1000000,
+                width: c.dimensions.width - 20,
+                height: c.dimensions.height - 20,
+                backgroundColor: "white",
+                margin: 15,
               }}
             >
-              <h2>{c.text}</h2>
+              <div style={{ margin: "auto" }}>
+                <h4>{c.text}</h4>
+              </div>
             </div>
           ))}
         </SelectionContainer>
