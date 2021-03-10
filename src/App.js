@@ -10,7 +10,7 @@ function App() {
   const [selectionArea, setSelectionArea] = useState([
     {
       id: 1,
-
+      text: "",
       dimensions: {
         height: 150,
         width: 300,
@@ -63,8 +63,8 @@ function App() {
       <div
         style={{
           backgroundImage: `url(${testImg})`,
-          height: 700,
-          width: 1000,
+          height: 400,
+          width: 800,
           border: "1px solid rgba(0, 0, 0, 0.05)",
         }}
       >
@@ -81,10 +81,16 @@ function App() {
         </SelectionContainer>
       </div>
       <header className="App-header">
-        <h1>FocusId {focusId}</h1>
+        <h3>FocusId {focusId}</h3>
         <button onClick={createSelectionArea}> Create </button>
         <button onClick={deleteSelectionArea}> Delete </button>
-        <img src={logo} className="App-logo" alt="logo" />
+        <form>
+          <label>
+            Name:
+            <input type="text" name="name" />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
