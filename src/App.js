@@ -6,7 +6,7 @@ import testImg from "./test.png";
 
 function App() {
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
-  const [count, setCount] = useState([]);
+  const [focusId, setFocusId] = useState(0);
   const [selectionArea, setSelectionArea] = useState([
     {
       id: 1,
@@ -20,25 +20,18 @@ function App() {
         y: 100,
       },
     },
-    {
-      id: 2,
-
-      dimensions: {
-        height: 300,
-        width: 300,
-      },
-      coordinates: {
-        x: 100,
-        y: 100,
-      },
-    },
   ]);
 
+  const deleteSelectionArea = () => {
+    setSelectionArea(selectionArea.filter((t) => t.id != focusId));
+  };
+
   const createSelectionArea = () => {
+    const _id = selectionArea.length + 1;
     setSelectionArea([
       ...selectionArea,
       {
-        id: selectionArea.length + 1,
+        id: _id,
 
         dimensions: {
           height: 100,
@@ -50,7 +43,7 @@ function App() {
         },
       },
     ]);
-
+    setFocusId(_id);
     forceUpdate();
   };
 
@@ -61,6 +54,7 @@ function App() {
 
   const handleSelectionAreaUpdate = (t) => {
     setSelectionArea([...selectionArea.filter((c) => c.id != t.id), t]);
+    setFocusId(t.id);
     console.log(selectionArea);
   };
 
@@ -87,8 +81,9 @@ function App() {
         </SelectionContainer>
       </div>
       <header className="App-header">
-        <h1>{`${count.length}, ${selectionArea.length}`}</h1>
+        <h1>FocusId {focusId}</h1>
         <button onClick={createSelectionArea}> Create </button>
+        <button onClick={deleteSelectionArea}> Delete </button>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
