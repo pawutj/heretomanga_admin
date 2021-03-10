@@ -38,7 +38,7 @@ function App() {
     setSelectionArea([
       ...selectionArea,
       {
-        id: 3,
+        id: selectionArea.length + 1,
 
         dimensions: {
           height: 100,
