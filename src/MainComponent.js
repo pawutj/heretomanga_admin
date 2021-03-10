@@ -43,6 +43,7 @@ function MainComponent() {
         },
       },
     ]);
+    setFocusId(_id);
   };
 
   useEffect(() => {
