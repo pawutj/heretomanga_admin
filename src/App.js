@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Selection, SelectionContainer } from "@madappgang/react-selections";
 import testImg from "./test.png";
 
 function App() {
+  const [, forceUpdate] = useReducer((x) => x + 1, 0);
   const [count, setCount] = useState([]);
   const [selectionArea, setSelectionArea] = useState([
     {
@@ -31,25 +32,32 @@ function App() {
         y: 100,
       },
     },
-    {
-      id: 3,
-
-      dimensions: {
-        height: 100,
-        width: 300,
-      },
-      coordinates: {
-        x: 2,
-        y: 2,
-      },
-    },
   ]);
 
   const createSelectionArea = () => {
-    // const ind = selectionArea.filter((c) => c.display == false)[0];
-    // const newArea = { ...ind, display: true };
-    // setSelectionArea([...selectionArea.filter((c) => c.id != ind.id), newArea]);
+    setSelectionArea([
+      ...selectionArea,
+      {
+        id: 3,
+
+        dimensions: {
+          height: 100,
+          width: 200,
+        },
+        coordinates: {
+          x: 1,
+          y: 0,
+        },
+      },
+    ]);
+
+    forceUpdate();
   };
+
+  useEffect(() => {
+    forceUpdate();
+    console.log(selectionArea);
+  }, [selectionArea]);
 
   const handleSelectionAreaUpdate = (t) => {
     setSelectionArea([...selectionArea.filter((c) => c.id != t.id), t]);
@@ -69,6 +77,7 @@ function App() {
         <SelectionContainer>
           {selectionArea.map((c, k) => (
             <Selection
+              key={c.id}
               backgroundImage
               interactive
               area={c}
