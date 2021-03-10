@@ -84,6 +84,19 @@ function MainComponent() {
               onAreaUpdate={handleSelectionAreaUpdate}
             />
           ))}
+          {selectionArea.map((c, k) => (
+            <div
+              style={{
+                position: "absolute",
+                left: c.coordinates.x,
+                top: c.coordinates.y,
+                backgroundColor: "red",
+                zIndex: 1000000,
+              }}
+            >
+              <h2>{c.text}</h2>
+            </div>
+          ))}
         </SelectionContainer>
       </div>
       <header className="App-header">
