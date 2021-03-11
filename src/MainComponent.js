@@ -92,7 +92,6 @@ function MainComponent() {
     <div
       style={{
         display: "flex",
-        height: "100%",
       }}
     >
       <div
@@ -105,7 +104,6 @@ function MainComponent() {
           width: imgWidth,
           border: "1px solid rgba(0, 0, 0, 0.05)",
           flex: 2,
-          position: "relative",
         }}
       >
         <div style={{ position: "absolute" }}>
@@ -148,7 +146,7 @@ function MainComponent() {
           ))}
         </SelectionContainer>
       </div>
-      <div className="App-header" style={{ flex: 1 }}>
+      <div style={{ position: "sticky", top: 0, alignSelf: "flex-start" }}>
         <h3>FocusId {focusId}</h3>
         <button onClick={createSelectionArea}> Create </button>
         <button onClick={deleteSelectionArea}> Delete </button>
