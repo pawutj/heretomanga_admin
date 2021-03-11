@@ -11,7 +11,7 @@ function App() {
         content="Width=device-width, initial-scale=1"
       ></meta>
       <div className="sidenav">
-        <a>Here To Manga</a>
+        <h2 style={{backgroundColor:'white'}}>Here To Manga</h2>
         <hr></hr>
         <a href="#">New Update</a>
         <hr></hr>
