@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import manga_card from "./manga_card.jpeg";
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 function MangaDetail() {
   return (
     <div className="App">
@@ -40,9 +46,11 @@ function MangaDetail() {
                           Chapter 4
                         </a>
                       </td>
-                      <td>
-                        <div class="btn btn-danger">tranlate</div>
-                      </td>
+                      <Link to="/main">
+                        <td>
+                          <div class="btn btn-danger">tranlate</div>
+                        </td>
+                      </Link>
                     </tr>
                     <tr>
                       <td>
@@ -71,8 +79,12 @@ function MangaDetail() {
                         </a>
                       </td>
                       <td>
-                        <div style={{ marginLeft: 8}} class="btn btn-warning">edit</div>
-                        <div style={{ marginLeft: 8}} class="btn btn-success">preview</div>
+                        <div style={{ marginLeft: 8 }} class="btn btn-warning">
+                          edit
+                        </div>
+                        <div style={{ marginLeft: 8 }} class="btn btn-success">
+                          preview
+                        </div>
                       </td>
                     </tr>
                   </table>

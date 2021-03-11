@@ -1,6 +1,12 @@
 import React, { userState, useReducer, useEffect } from "react";
 import manga_card from "./manga_card.jpeg";
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 const testImg = "https://bit.ly/3t8CiUm";
 
 function AllMangaComponent() {
@@ -13,18 +19,21 @@ function AllMangaComponent() {
         {/* <img src="https://bit.ly/3t8CiUm"></img> */}
         <div class="row">
           <div class="col-md-3">
-            <div className="card">
-              <img
-                className="card-img-top"
-                src={manga_card}
-                alt="Card image cap"
-              />
-              <div className="card-body">
-                <p className="card-text">Return of the King</p>
-                <p className="card-text">20/30</p>
+            <Link to="/detail">
+              <div className="card">
+                <img
+                  className="card-img-top"
+                  src={manga_card}
+                  alt="Card image cap"
+                />
+                <div className="card-body">
+                  <p className="card-text">Return of the King</p>
+                  <p className="card-text">20/30</p>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
+
           <div class="col-md-3">
             <div className="card">
               <img
@@ -40,7 +49,7 @@ function AllMangaComponent() {
           </div>
           <div class="col-md-3">
             <div className="card">
-            <img
+              <img
                 className="card-img-top"
                 src={manga_card}
                 alt="Card image cap"

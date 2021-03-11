@@ -2,7 +2,13 @@ import React, { useState, useReducer, useEffect } from "react";
 import MainComponent from "./MainComponent";
 import AllMangaComponent from "./AllMangaComponent";
 import MangaDetail from "./MangaDetail";
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -13,7 +19,7 @@ function App() {
         content="Width=device-width, initial-scale=1"
       ></meta>
       <div className="sidenav">
-        <h2 style={{backgroundColor:'white'}}>Here To Manga</h2>
+        <h2 style={{ backgroundColor: "white" }}>Here To Manga</h2>
         <hr></hr>
         <a href="#">New Update</a>
         <hr></hr>
@@ -21,9 +27,22 @@ function App() {
         <hr></hr>
       </div>
       <div className="main">
-        {/* <MainComponent /> */}
-        {/* <AllMangaComponent /> */}
-        <MangaDetail />
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <AllMangaComponent />
+            </Route>
+            <Route exact path="/detail">
+              <MangaDetail />
+            </Route>
+            <Route exact path="/main">
+              <MainComponent />
+            </Route>
+            <Route exact path="/allmanga">
+              <AllMangaComponent />
+            </Route>
+          </Switch>
+        </Router>
       </div>
     </div>
   );
