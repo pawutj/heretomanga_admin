@@ -1,12 +1,15 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer, useEffect, useRef } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Selection, SelectionContainer } from "@madappgang/react-selections";
 import testImg from "./test.png";
+import domtoimage from "dom-to-image";
 
 function MainComponent() {
+  const componentRef = useRef();
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
   const [focusId, setFocusId] = useState(1);
+  const [cameraMode, setCameraMode] = useState(false);
   const [selectionArea, setSelectionArea] = useState([
     {
       id: 1,
@@ -49,7 +52,7 @@ function MainComponent() {
   useEffect(() => {
     console.log(selectionArea);
     forceUpdate();
-  }, [selectionArea, focusId]);
+  }, [selectionArea, focusId, cameraMode]);
 
   const setSelectionAreaText = (e) => {
     const t = {
@@ -64,9 +67,26 @@ function MainComponent() {
     setFocusId(t.id);
   };
 
+  const exportJPG = () => {
+    const input = document.getElementById("divToPrint");
+    console.log(input);
+    //setCameraMode(!cameraMode);
+
+    domtoimage
+      .toPng(input)
+      .then(function (dataUrl) {
+        var img = new Image();
+        img.src = dataUrl;
+        //document.body.appendChild(img);
+      })
+      .catch(function (error) {
+        console.error("oops, something went wrong!", error);
+      });
+  };
   return (
     <div className="App">
       <div
+        id="divToPrint"
         style={{
           backgroundImage: `url(${testImg})`,
           height: 400,
@@ -75,15 +95,16 @@ function MainComponent() {
         }}
       >
         <SelectionContainer>
-          {selectionArea.map((c, k) => (
-            <Selection
-              key={c.id}
-              backgroundImage
-              interactive
-              area={c}
-              onAreaUpdate={handleSelectionAreaUpdate}
-            />
-          ))}
+          {!cameraMode &&
+            selectionArea.map((c, k) => (
+              <Selection
+                key={c.id}
+                backgroundImage
+                interactive
+                area={c}
+                onAreaUpdate={handleSelectionAreaUpdate}
+              />
+            ))}
           {selectionArea.map((c, k) => (
             <div
               style={{
@@ -108,6 +129,8 @@ function MainComponent() {
         <h3>FocusId {focusId}</h3>
         <button onClick={createSelectionArea}> Create </button>
         <button onClick={deleteSelectionArea}> Delete </button>
+        <button onClick={exportJPG}> ExportJPG </button>
+
         <form>
           <label>
             Name:
