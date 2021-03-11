@@ -1,6 +1,8 @@
 import React, { useState, useReducer, useEffect } from "react";
 import MainComponent from "./MainComponent";
 import AllMangaComponent from "./AllMangaComponent";
+import MangaDetail from "./MangaDetail";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -20,7 +22,8 @@ function App() {
       </div>
       <div className="main">
         {/* <MainComponent /> */}
-        <AllMangaComponent />
+        {/* <AllMangaComponent /> */}
+        <MangaDetail />
       </div>
     </div>
   );
