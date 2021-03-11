@@ -6,10 +6,19 @@ import testImg from "./test.png";
 import domtoimage from "dom-to-image";
 
 function MainComponent() {
-  const componentRef = useRef();
+  var img = new Image();
+
+  img.onload = function () {
+    setImgHeight(img.height);
+    setImgWidth(img.width);
+  };
+  img.src = testImg;
+  const [imgHeight, setImgHeight] = useState(0);
+  const [imgWidth, setImgWidth] = useState(0);
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
   const [focusId, setFocusId] = useState(1);
   const [cameraMode, setCameraMode] = useState(false);
+
   const [selectionArea, setSelectionArea] = useState([
     {
       id: 1,
@@ -84,14 +93,19 @@ function MainComponent() {
       });
   };
   return (
-    <div className="App">
+    <div
+      style={{
+        display: "flex",
+      }}
+    >
       <div
         id="divToPrint"
         style={{
           backgroundImage: `url(${testImg})`,
-          height: 400,
-          width: 800,
+          height: imgHeight,
+          width: imgWidth,
           border: "1px solid rgba(0, 0, 0, 0.05)",
+          flex: 2,
         }}
       >
         <SelectionContainer>
@@ -125,7 +139,7 @@ function MainComponent() {
           ))}
         </SelectionContainer>
       </div>
-      <header className="App-header">
+      <div className="App-header" style={{ flex: 1 }}>
         <h3>FocusId {focusId}</h3>
         <button onClick={createSelectionArea}> Create </button>
         <button onClick={deleteSelectionArea}> Delete </button>
@@ -133,7 +147,6 @@ function MainComponent() {
 
         <form>
           <label>
-            Name:
             {selectionArea
               .filter((c) => c.id == focusId)
               .map((c, k) => (
@@ -146,18 +159,7 @@ function MainComponent() {
               ))}
           </label>
         </form>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </div>
     </div>
   );
 }

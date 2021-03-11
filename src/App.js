@@ -19,8 +19,8 @@ function App() {
         <hr></hr>
       </div>
       <div className="main">
-        {/* <MainComponent /> */}
-        <AllMangaComponent />
+        <MainComponent />
+        {/* <AllMangaComponent /> */}
       </div>
     </div>
   );
