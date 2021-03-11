@@ -6,15 +6,11 @@ import testImg from "./test.png";
 import domtoimage from "dom-to-image";
 
 function MainComponent() {
-  var img = new Image();
-
-  img.onload = function () {
-    setImgHeight(img.height);
-    setImgWidth(img.width);
-  };
-  img.src = testImg;
+  const imgUrl =
+    "https://media.reaperscans.com/file/reaperscans/comics/951B222AB3EADADCBB32E241E817845AB609514BC21D2BAD/volumes/DCCF4189E27866A945D2DE5DF4590C18A4766EC85F4412C7/chapters/D9B37562BC16D93AC2B82523A5A8AC023005C3C9FA0FD341/003.png";
   const [imgHeight, setImgHeight] = useState(0);
   const [imgWidth, setImgWidth] = useState(0);
+
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
   const [focusId, setFocusId] = useState(1);
   const [cameraMode, setCameraMode] = useState(false);
@@ -96,14 +92,16 @@ function MainComponent() {
     <div
       style={{
         display: "flex",
+        height: "100%",
       }}
     >
       <div
         id="divToPrint"
         style={{
-          backgroundImage: `url(${testImg})`,
-          height: imgHeight,
+          backgroundImage: `url(https://media.reaperscans.com/file/reaperscans/comics/951B222AB3EADADCBB32E241E817845AB609514BC21D2BAD/volumes/DCCF4189E27866A945D2DE5DF4590C18A4766EC85F4412C7/chapters/D9B37562BC16D93AC2B82523A5A8AC023005C3C9FA0FD341/003.png)`,
+          height: 1000,
           width: imgWidth,
+
           border: "1px solid rgba(0, 0, 0, 0.05)",
           flex: 2,
         }}
