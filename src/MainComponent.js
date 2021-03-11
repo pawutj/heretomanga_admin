@@ -98,14 +98,24 @@ function MainComponent() {
       <div
         id="divToPrint"
         style={{
-          backgroundImage: `url(https://media.reaperscans.com/file/reaperscans/comics/951B222AB3EADADCBB32E241E817845AB609514BC21D2BAD/volumes/DCCF4189E27866A945D2DE5DF4590C18A4766EC85F4412C7/chapters/D9B37562BC16D93AC2B82523A5A8AC023005C3C9FA0FD341/003.png)`,
+          display: "inline-block",
+          position: "relative",
+          //backgroundImage: `url(${imgUrl})`,
           height: 1000,
           width: imgWidth,
-
           border: "1px solid rgba(0, 0, 0, 0.05)",
           flex: 2,
+          position: "relative",
         }}
       >
+        <div style={{ position: "absolute" }}>
+          <img
+            src="https://bit.ly/3t8CiUm"
+            alt="av"
+            referrerPolicy="no-referrer"
+            zIndex="-20"
+          ></img>
+        </div>
         <SelectionContainer>
           {!cameraMode &&
             selectionArea.map((c, k) => (
@@ -115,6 +125,7 @@ function MainComponent() {
                 interactive
                 area={c}
                 onAreaUpdate={handleSelectionAreaUpdate}
+                position="absolute"
               />
             ))}
           {selectionArea.map((c, k) => (

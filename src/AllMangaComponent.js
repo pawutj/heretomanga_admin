@@ -3,7 +3,11 @@ import React, { userState, useReducer, useEffect } from "react";
 function AllMangaComponent() {
   return (
     <div className="App">
-      <img src="https://bit.ly/3t8CiUm" alt="av"></img>
+      <img
+        src="https://bit.ly/3t8CiUm"
+        alt="av"
+        referrerPolicy="no-referrer"
+      ></img>
       <h2>AllMangaComponent</h2>
       <div className="container">
         <img src=""></img>
